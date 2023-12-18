@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Jelajahi dunia kreativitas dan kolaborasi di [Nama Unit Kegiatan Mahasiswa]. Temukan ruang bagi bakat Anda melalui rangkaian kegiatan budaya, sosial, dan akademis kami. Bergabunglah dengan komunitas yang penuh semangat dan buat kenangan tak terlupakan di setiap langkah perjalanan Anda di [Nama Universitas].">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a2bb2fdda.js" crossorigin="anonymous"></script>
+    <title>Detail Berita</title>
+    <link rel="icon" href="https://cdn.icon-icons.com/icons2/2699/PNG/512/mint_logo_icon_168098.png"
+        type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        article {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        article img {
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        article div {
+            flex: 1;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .footer {
+            background-color: #A7C957;
+        }
+
+        .img-card {
+            display: block;
+            float: left;
+            max-width: 320px;
+            border: 3px solid #fff;
+            border-radius: 10px;
+        }
+
+        .text-card {
+            clear: left;
+        }
+        .back-button {
+            color: #007AFF;
+            /* Warna biru seperti di Safari */
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="/static/js/script.js"></script>
+</head>
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="neubar">
+        <div class="container">
+            <a class="navbar-brand" id="logo" href="{{ url_for('index') }}">
+                <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/mint_logo_icon_168972.png" height="50"
+                    alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('profil') %}active{% endif %}"
+                            href="{{ url_for('profil') }}">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('ukm') %}active{% endif %}"
+                            href="{{ url_for('ukm') }}">UKM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('berita') %}active{% endif %}"
+                            href="{{ url_for('berita') }}">Berita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('diskusi') %}active{% endif %}"
+                            href="{{ url_for('diskusi') }}">Diskusi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('layanan') %}active{% endif %}"
+                            href="{{ url_for('layanan') }}">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light" role="button"
+                            style="background-color: #BC4749;">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+<body>
+    <div class="main" style="margin-top: 100px;">
+        <a href="#" id="backButton" class="back-button">&#9664; Kembali ke halaman sebelumnya</a>
+        <center>
+            <h1>DETAIL BERITA</h1>
+        </center><br>
+
+    </div>
+    <article class="news-article">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="{{ url_for('static', filename=berita['gambar'][7:]) }}" alt="" class="img-fluid">
+        </div>
+        <div class="article-content">
+            <h1>{{ berita['title'] }}</h1>
+            <p class="text-card">Tanggal Publikasi: {{ berita['date'] }}</p>
+            <p>UKM: {{ berita['kategori'] }}</p>
+            <p>{{ berita['deskripsi'] }}</p>
+        </div>
+    </article>
+    
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('backButton').addEventListener('click', function () {
+            goBack();
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+
+</html>

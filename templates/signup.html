@@ -1,0 +1,164 @@
+<!-- templates/signup.html -->
+
+{% extends "layout.html" %}
+
+{% block title %}Sign Up{% endblock %}
+{% block head %}
+<style>
+    footer{
+        display: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<!-- {% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    {{ messages[0] }}
+</div>
+{% endif %}
+{% endwith %} -->
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                <div class="text-center my-3">
+                    <img style="width: 200px;"
+                        src="https://cdn.icon-icons.com/icons2/2699/PNG/512/mint_logo_icon_168972.png" alt="logo"
+                        width="100">
+                </div>
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <h1 class="fs-4 card-title fw-bold mb-4 ml-xl" style="text-align: center;">Sign Up</h1>
+                        <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+                            {{ form.csrf_token }}
+                            <div class="form-group">
+                                <label for="username-input">Username:</label>
+                                {{ form.username(class="form-control", placeholder="Enter your username", id="username-input") }}
+                                <div id="username-feedback"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password-input">Password:</label>
+                                {{ form.password(class="form-control", placeholder="Enter your password", id="password-input") }}
+
+                                <div class="form-group">
+                                    <label for="confirm-password-input">Confirm Password:</label>
+                                    {{ form.confirm_password(class="form-control", placeholder="Confirm your password", id="confirm-password-input") }}
+
+
+                                    <div id="password-feedback"></div>
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label for="role">Role:</label>
+                                    <select name="role" class="form-control">
+                                        <option value="user" selected>User</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100" id="signup-button">Sign Up</button>
+                        </form>
+                        <p>Sudah punya akun? <a href="{{ url_for('login') }}">Login disini</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const usernameInput = document.getElementById("username-input");
+        const usernameFeedback = document.getElementById("username-feedback");
+        const passwordInput = document.getElementById("password-input");
+        const confirmInput = document.getElementById("confirm-password-input");
+        const passwordFeedback = document.getElementById("password-feedback");
+        const signUpButton = document.getElementById("signup-button");
+
+        if (usernameInput && usernameFeedback && passwordInput && confirmInput && passwordFeedback &&
+            signUpButton) {
+            const updateUsernameFeedback = (isValid, message) => {
+                usernameInput.classList.toggle("is-valid", isValid);
+                usernameInput.classList.toggle("is-invalid", !isValid);
+                usernameFeedback.innerHTML = message;
+                usernameFeedback.classList.toggle("text-success", isValid);
+                usernameFeedback.classList.toggle("text-danger", !isValid);
+                signUpButton.disabled = !isValid; 
+            };
+
+            const updatePasswordFeedback = (isValid, message) => {
+                passwordInput.classList.toggle("is-valid", isValid);
+                passwordInput.classList.toggle("is-invalid", !isValid);
+                confirmInput.classList.toggle("is-valid", isValid);
+                confirmInput.classList.toggle("is-invalid", !isValid);
+                passwordFeedback.innerHTML = message;
+                passwordFeedback.classList.toggle("text-success", isValid);
+                passwordFeedback.classList.toggle("text-danger", !isValid);
+                signUpButton.disabled = !isValid; 
+            };
+
+            usernameInput.addEventListener("input", function () {
+                const username = this.value.trim();
+
+                if (username === "") {
+                    updateUsernameFeedback(false,
+                        '<i class="bi bi-x-circle text-danger"></i> Username tidak boleh kosong');
+                    return;
+                }
+
+                fetch(`/check_username?username=${username}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const isValid = data.available;
+                        const message = isValid ?
+                            '<i class="bi bi-check-circle text-success"></i> Username tersedia' :
+                            '<i class="bi bi-x-circle text-danger"></i> Username sudah ada';
+
+                        updateUsernameFeedback(isValid, message);
+                    })
+                    .catch(error => {
+                        console.error('Error checking username availability:', error);
+                        updateUsernameFeedback(false,
+                            '<i class="bi bi-x-circle text-danger"></i> Error checking username availability'
+                        );
+                    });
+            });
+
+            passwordInput.addEventListener("input", function () {
+                const password = this.value;
+                const confirm = confirmInput.value;
+
+                if (password === "" || confirm === "") {
+                    updatePasswordFeedback(false,
+                        '<i class="bi bi-x-circle text-danger"></i> Password tidak boleh kosong');
+                    return;
+                }
+
+                const isValid = password === confirm;
+                const message = isValid ?
+                    '<i class="bi bi-check-circle text-success"></i> Passwords sesuai' :
+                    '<i class="bi bi-x-circle text-danger"></i> Passwords tidak sesuai';
+
+                updatePasswordFeedback(isValid, message);
+            });
+
+            confirmInput.addEventListener("input", function () {
+                const password = passwordInput.value;
+                const confirm = this.value;
+
+                if (password === "" || confirm === "") {
+                    updatePasswordFeedback(false,
+                        '<i class="bi bi-x-circle text-danger"></i> Password tidak boleh kosong');
+                    return;
+                }
+
+                const isValid = password === confirm;
+                const message = isValid ?
+                    '<i class="bi bi-check-circle text-success"></i> Passwords sesuai' :
+                    '<i class="bi bi-x-circle text-danger"></i> Passwords tidak sesuai';
+
+                updatePasswordFeedback(isValid, message);
+            });
+        }
+    });
+</script>
+
+{% endblock %}

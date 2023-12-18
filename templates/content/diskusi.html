@@ -1,0 +1,244 @@
+{% extends "layout.html" %}
+{% block title %} UKM {% endblock %}
+
+{% block content %}
+
+<body class="container" style="background-color: #EEEEEE;">
+    <div class="text-center my-3 d-flex justify-content-center">
+        <div style="display: flex; align-items: center;">
+            <img style="width: 200px; vertical-align: middle;"
+                src="https://cdn.icon-icons.com/icons2/2699/PNG/512/mint_logo_icon_168972.png" alt="logo" width="100">
+            <h1 style="display: inline; margin: 0;"><b>Discussion</b></h1>
+        </div>
+    </div>
+
+    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container mt-4">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %} -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"
+        style="border-radius: 20px; padding: 10px 20px 10px 20px;">
+        <img class="rounded-circle"
+            src="{% if current_user.profile_pic %}{{ url_for('static', filename='image/profile/' + current_user.profile_pic) }}{% else %}https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png{% endif %}"
+            alt="https://i.imgur.com/RpzrMR2.jpg" width="40" style="margin-right: 10px;">
+        <a class="navbar-brand" href="{{ url_for('diskusi') }}">
+            {% if current_user.is_authenticated %}
+            {{ current_user.username }}
+            {% else %}
+            Home
+            {% endif %}
+        </a>
+
+        <!-- Add a logout link on the right -->
+        <div class="collapse navbar-collapse justify-content-end">
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
+        </div>
+    </nav>
+
+
+    <!-- Form for creating a new post -->
+    <form method="POST" action="{{ url_for('diskusi') }}" class="mb-4">
+        {{ form_post.hidden_tag() }}
+        <div class="form-group">
+            {{ form_post.content.label(class="font-weight-bold mt-3") }}
+            {{ form_post.content(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-danger" name="submit_post" style="background-color: #BC4749;">Post</button>
+    </form>
+
+    <hr>
+
+    <!-- Display all posts -->
+    {% for post in posts %}
+    <section style="background-color: #eee;">
+        <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 col-lg-10 col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if current_user.is_authenticated and (current_user.role == 'admin' or current_user.id == post.user_id) %}
+                            <form method="POST" action="{{ url_for('delete_post', post_id=post['_id']) }}"
+                                style="position: absolute; top: 0; right: 0;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete Post</button>
+                            </form>
+                            {% endif %}
+                            <div class="d-flex flex-start align-items-center">
+                                <img class="rounded-circle shadow-1-strong me-3" src="{% if post.user_id and post.user_id != 'Anonymous' %}
+                                        {% set user = load_user(post.user_id) %}
+                                        {{ url_for('static', filename='image/profile/' + (user.profile_pic if user and user.profile_pic else 'default_profile.jpg')) }}
+                                    {% else %}
+                                        {{ url_for('static', filename='image/default_profile.jpg') }}
+                                        {% endif %}" alt="avatar" width="60" height="60" style="object-fit: cover;" />
+
+                                <div>
+                                    <h6 class="fw-bold text-primary mb-1">{{ post.user_id }}</h6>
+                                    <!-- <span class="d-block font-weight-bold name">{{ post.user_id }}</span> -->
+                                    {% if post.date %}
+                                    <span
+                                        class="date text-black-50">{{ naturaltime(datetime.utcnow() - post.date) }}</span>
+                                    {% else %}
+                                    <span class="date text-black-50">No date available</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <p class="mt-3 mb-4 pb-2 ml-4">{{ post.content }}</p>
+
+                            <div class="small d-flex justify-content-start post-card">
+                            </div>
+
+                            <!-- Display existing comments for the post -->
+                            {% for comment in post_comments[post['_id']|string] %}
+                            <div class="card mt-2 comment-card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-start align-items-center">
+                                        <img class="rounded-circle shadow-1-strong me-3"
+                                            src="https://i.imgur.com/RpzrMR2.jpg" alt="avatar" width="30" height="30" />
+                                        <h6 class="fw-bold text-primary mb-2">{{ comment.user_id }}</h6>
+                                    </div>
+                                    <p class="card-text ml-5">
+                                        <small class="text-muted">
+                                            {% if comment.date %}
+                                            {{ naturaltime(datetime.utcnow() - comment.date) }}
+                                            {% else %}
+                                            No date available
+                                            {% endif %}
+                                        </small>
+                                    </p>
+                                    <p class="card-text mt-4 ml-4">{{ comment.text }}</p>
+
+
+                                    <!-- Add delete button for comments -->
+                                    {% if current_user.is_authenticated and (current_user.role == 'admin' or current_user.id == comment.user_id) %}
+                                    <form method="POST"
+                                        action="{{ url_for('delete_comment', comment_id=comment['_id'] | default('')) }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete Comment</button>
+                                    </form>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+                            <!-- ====== tambah komen ======= -->
+                            <div class="card-footer py-3 border-0" style="background-color: #cccccc;">
+                                <div class="d-flex flex-start w-100" id="komen-form">
+                                    <img class="rounded-circle shadow-1-strong me-3"
+                                        src="{% if current_user.profile_pic %}{{ url_for('static', filename='image/profile/' + current_user.profile_pic) }}{% else %}https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png{% endif %}" alt="avatar"
+                                        width="40" height="40" style="object-fit: cover;" />
+                                    <form method="POST" action="{{ url_for('diskusi') }}" class="mb-2">
+                                        {{ form_comment.hidden_tag() }}
+                                        {{ form_comment.post_id(value=post['_id']) }}
+                                        <div class="form-group">
+                                            {{ form_comment.text.label(class="font-weight-bold") }}
+                                            <div class="comment-kolom">
+                                                {{ form_comment.text(class="form-control", rows=4) }}
+                                            </div>
+
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary"
+                                            name="submit_comment">Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    {% endfor %}
+    <!-- Bootstrap JS scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+</body>
+
+{% endblock %}
+
+
+
+
+<!-- Display all posts -->
+{% for post in posts %}
+<div class="card mt-4">
+    <div class="card-body">
+        {% if current_user.is_authenticated and current_user.id == post.user_id %}
+        <!-- Move the delete button to the top-right corner -->
+        <form method="POST" action="{{ url_for('delete_post', post_id=post['_id']) }}"
+            style="position: absolute; top: 0; right: 0;">
+            <button type="submit" class="btn btn-danger btn-sm">Delete Post</button>
+        </form>
+        {% endif %}
+
+        <div class="bg-white p-2">
+            <div class="d-flex flex-row user-info">
+                <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                <div class="d-flex flex-column justify-content-start ml-2">
+                    <span class="d-block font-weight-bold name">{{ post.user_id }}</span>
+                    {% if post.date %}
+                    <span class="date text-black-50">{{ naturaltime(datetime.utcnow() - post.date) }}</span>
+                    {% else %}
+                    <span class="date text-black-50">No date available</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-2">
+                <p class="comment-text">{{ post.content }}</p>
+            </div>
+        </div>
+
+        <!-- Display existing comments for the post -->
+        {% for comment in post_comments[post['_id']|string] %}
+        <div class="card mt-2">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ comment.user_id }}:</h6>
+                <p class="card-text">{{ comment.text }}</p>
+                <p class="card-text">
+                    <small class="text-muted">
+                        {% if comment.date %}
+                        {{ naturaltime(datetime.utcnow() - comment.date) }}
+                        {% else %}
+                        No date available
+                        {% endif %}
+                    </small>
+                </p>
+
+                <!-- Add delete button for comments -->
+                {% if current_user.is_authenticated and current_user.id == comment.user_id %}
+                <form method="POST" action="{{ url_for('delete_comment', comment_id=comment['_id'] | default('')) }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete Comment</button>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+
+
+        <!-- Form for adding a comment -->
+        <form method="POST" action="{{ url_for('diskusi') }}" class="mb-2">
+            {{ form_comment.hidden_tag() }}
+            {{ form_comment.post_id(value=post['_id']) }}
+            <div class="form-group">
+                {{ form_comment.text.label(class="font-weight-bold") }}
+                {{ form_comment.text(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-secondary" name="submit_comment">Comment</button>
+        </form>
+
+    </div>
+    {% endfor %}

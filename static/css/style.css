@@ -1,0 +1,246 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    transition: 0.6s;
+    z-index: 100;
+}
+
+header.sticky {
+    background: #fff;
+}
+
+header.sticky ul li a {
+    padding: 5px 100px;
+    /* background: #fae8d2; */
+}
+
+/* header #logo{
+    position: relative;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.6s;
+} */
+
+/* header ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* header ul li{
+    position: relative;
+    margin-left: 20px;
+} */
+
+header ul li a {
+    position: relative;
+    margin: 0 5px;
+    text-decoration: none;
+    color: white;
+    letter-spacing: 2px;
+    font-weight: 500px;
+    transition: 0.6s;
+}
+
+
+#body-login {
+    margin-top: 0px;
+}
+
+#neubar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
+    text-align: center;
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.nav-item .active {
+    border-radius: 6px;
+    background: linear-gradient(145deg, #A7C957, #6A994E);
+    box-shadow: 4px 4px 8px #386641,
+        -4px -4px 8px #afc972;
+}
+
+.nav-item:hover {
+    color: #000;
+}
+
+#neubar .dropdown-menu a:hover {
+    color: #454545
+}
+
+#neubar .nav-item {
+    margin: auto 4px;
+}
+
+#neubar a {
+
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#neubar .dropdown-menu {
+    background: #545454
+}
+
+a.navbar-brand {
+    color: #454545
+}
+
+.card-body {
+    padding: 20px;
+}
+
+
+.card-footer {
+    padding: 20px;
+    padding-left: 50px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.card-body.comment-card-body {
+    padding: 15px;
+}
+
+.post-card {
+    border-bottom: 2px solid #cccc;
+    margin-bottom: 20px;
+}
+
+.comment-card {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+.comment-kolom {
+    width: 500px;
+}
+
+/* ======= akun ======== */
+.card-akun {
+    margin-top: 20px;
+    border: none;
+    background-color: whitesmoke;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.card-akun:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #F2E8CF;
+    transform: scaleY(1);
+    transition: all 0.5s;
+    transform-origin: bottom
+}
+
+.card-akun:after {
+
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #BC4749;
+    transform: scaleY(0);
+    transition: all 0.5s;
+    transform-origin: bottom
+}
+
+.card-akun:hover::after {
+    transform: scaleY(1);
+}
+
+.social-list {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+}
+
+.social-list li {
+    padding: 10px;
+    color: #BC4749;
+    font-size: 19px;
+}
+
+/* ========= Rumpun ======= */
+#rumpun-content {
+    padding-top: 50px;
+}
+
+.button-merah {
+    background-color: #BC4749;
+    border-color: #BC4749;
+}
+
+.button-merah:hover {
+    background-color: #9E3E40;
+    border-color: #9E3E40;
+}
+
+/* ======= android ======== */
+@media only screen and (max-width: 360px) {
+    .comment-kolom {
+        width: 150px;
+    }
+
+    #komen-form {
+        margin-left: -40px;
+    }
+}
+
+/*===== Smartphones dan Tablet Potrait ====== */
+@media only screen and (min-width: 370px) and (max-width: 600px) {
+    .comment-kolom {
+        width: 170px;
+    }
+
+    #komen-form {
+        margin-left: -30px;
+    }
+}
+
+/* ============== Tablet Landscape (Landscape Mode) ============== */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .comment-kolom {
+        width: 300px;
+    }
+
+    #komen-form {
+        margin-left: -20px;
+    }
+}
+
+/* =============== Tablet dan Desktop (Minimum Width 768px) ================*/
+@media only screen and (min-width: 768px) {
+    .comment-kolom {
+        width: 500px;
+    }
+
+    #komen-form {
+        margin-left: -20px;
+    }
+}

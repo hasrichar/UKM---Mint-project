@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+</head>
+
+<body>
+    {% if username %}
+    <h1>Hello, {{ username }}!</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <h2>Chat with {{ recipient }}</h2>
+    <div id="chatList"></div>
+    <input id="messageInput" autocomplete="off" /><button onclick="sendMessage()">Send</button>
+
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('message', function (data) {
+            $('#chatList').append('<p><b>' + data.sender + ':</b> ' + data.message + '</p>');
+        });
+
+        function sendMessage() {
+            var message = $('#messageInput').val();
+            socket.emit('message', {
+                recipient: '{{ recipient }}',
+                message: message
+            });
+            $('#chatList').append('<p><b>You:</b> ' + message + '</p>');
+            $('#messageInput').val('');
+        }
+    </script>
+    {% else %}
+    <p>You are not logged in.</p>
+    <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+</body>
+
+</html>

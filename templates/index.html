@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Modern and Innovative Network of Technology University" />
+    <meta property="og:description" content="Jelajahi dunia kreativitas dan kolaborasi di MUKM. Temukan ruang bagi bakat Anda melalui rangkaian kegiatan budaya, sosial, dan akademis kami. Bergabunglah dengan komunitas yang penuh semangat dan buat kenangan tak terlupakan di setiap langkah perjalanan Anda di MINT University." />
+    <meta property="og:image" content="{{ url_for('static', filename='bg1.png') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a2bb2fdda.js" crossorigin="anonymous"></script>
+    <title>MINT University</title>
+    <link rel="icon" href="https://cdn.icon-icons.com/icons2/2699/PNG/512/mint_logo_icon_168098.png"
+        type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <style></style>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'>
+    </script>
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #E9ECEF;
+            /* max-width: 100%; 
+            overflow-x: hidden; */
+        }
+
+        .jumbotron {
+            background: url('/static/image/bg1.png') center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .jumbotron h1 {
+            font-size: 3em;
+            color: black;
+        }
+
+        .jumbotron p {
+            font-size: 2em;
+            color: black;
+        }
+
+        .features {
+            background-color: #e9ecef;
+            padding: 60px 0;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #A7C957;
+        }
+
+        .button-merah {
+            background-color: #BC4749;
+            border-color: #BC4749;
+        }
+
+        .button-merah:hover {
+            background-color: #9E3E40;
+            border-color: #9E3E40;
+        }
+    </style>
+    <script src="/static/js/script.js"></script>
+</head>
+<header>
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="neubar">
+        <div class="container">
+            <a class="navbar-brand" id="logo" href="{{ url_for('index') }}">
+                <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/mint_logo_icon_168972.png" height="50"
+                    alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('profil') %}active{% endif %}"
+                            href="{{ url_for('profil') }}">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('ukm') %}active{% endif %}"
+                            href="{{ url_for('ukm') }}">UKM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('berita') %}active{% endif %}"
+                            href="{{ url_for('berita') }}">Berita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('diskusi') %}active{% endif %}"
+                            href="{{ url_for('diskusi') }}">Diskusi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('layanan') %}active{% endif %}"
+                            href="{{ url_for('layanan') }}">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if current_user.is_authenticated %}
+                        <a class="nav-link {% if request.path == url_for('akun') %}active{% endif %}"
+                            href="{{ url_for('akun') }}"><img class="rounded-circle shadow-1-strong me-3"
+                                src="{% if current_user.profile_pic %}{{ url_for('static', filename='image/profile/' + current_user.profile_pic) }}{% else %}https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png{% endif %}"
+                                width="40" height="40" style="object-fit: cover;" />{{ current_user.username }}</a>
+                        {% else %}
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light" role="button"
+                            style="background-color: #BC4749;">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+<body>
+    <!-- Content -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Selamat Datang di Website Unit Kegiatan Mahasiswa</h1>
+            <p class="lead">"Temukan Bakatmu Disini"</p>
+        </div>
+    </div>
+
+    <section class="pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-3">Berita Terkini</h3>
+                </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    {% for berita in beritas %}
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img class="img-fluid" alt="Deskripsi Gambar"
+                                                style="width: 400px; height: 250px; object-fit: contain;"
+                                                src="{{ berita['gambar'] }}">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ berita['title'] }}</h4>
+                                                <p class="card-text">{{ berita['date'] }}</p>
+                                                <a href="/detail_berita/{{ berita['_id'] }}"
+                                                    class="btn button-merah btn-primary">Selengkapnya</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="features mx-5">
+        <h1 class="text-center">UKM</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="https://img.freepik.com/free-photo/3d-illustration-academic-hat-with-golden-tassel_107791-16182.jpg?w=740&t=st=1702274845~exp=1702275445~hmac=36616074927523c879491319df47fa0bbe7f333bc07eda701f578556224ee3d6"
+                        fetchpriority="low" alt="image" class="img-fluid">
+                    <div class="card-body">
+                        <h4 class="card-title">UKM BIDANG PENALARAN</h4>
+                        <p class="card-text">UKM bidang penalaran dapat menjadi wadah bagi kamu yang ingin mengasah
+                            kemampuan berpikir kritis. Tujuannya, agar kamu bisa memberikan solusi mengenai permasalahan
+                            di dalam kampus maupun masyarakat. Bidang yang satu ini biasanya terdiri dari UKM
+                            penelitian, UKM bahasa asing, UKM jurnalistik, dan masih banyak lagi.</p>
+                        <a href="#" class="btn button-merah btn-primary">Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="/static/image/1.jpg" fetchpriority="low" alt="image" class="img-fluid">
+                    <div class="card-body">
+                        <h4 class="card-title">UKM BASKET</h4>
+                        <p class="card-text">Unit kegiatan mahasiswa Basket Resmi berdiri pada Bulan November tahun
+                            2014. Didasari dengan semangat yang tinggi dari beberapa mahasiswa/i yang ingin
+                            mengembangkan minat dan bakat para mahasiswa/i dibidang olah raga basket. Awalnya
+                            dikoordinasi oleh salah satu mahasiswa dan salah satu pembimbing. Dan awalnya diadakan BTLC
+                            untuk pembetukan pengurus serta pembentukan karakter tim ini, dan juga dari awal sampai saat
+                            ini kita masih dilatih oleh Coach.</p>
+                        <a href="#" class="btn button-merah btn-primary">Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="/static/image/1.jpg" fetchpriority="low" alt="image" class="img-fluid">
+                    <div class="card-body">
+                        <h4 class="card-title">UKM Fotografi</h4>
+                        <p class="card-text">Unit Fotografi Universitas Pertamina adalah wadah para pecinta fotografi
+                            dan sinematografi untuk mengembangkan kemampuannya.</p>
+                        <a href="#" class="btn button-merah btn-primary">Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-6" style="margin-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-md-start">
+                    <i class="fa-regular fa-envelope"></i>
+                    <i class="fa-regular fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="footer text-dark text-center py-3">
+        <div class="container">
+            <div class="row" style="height: 30px;">
+                <div class="col-md-6 text-md-start">
+                    <p>&copy; 2023 Mint Universty</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    Develope By MiNT
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+
+</html>

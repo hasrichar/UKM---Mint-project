@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}Akun{% endblock %}
+
+{% block content %}
+
+<body>
+    <div class="container mt-5">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-7">
+
+                <div class="card-akun p-3 py-4">
+
+                    <div class="text-center">
+                        <!-- Menampilkan gambar profil -->
+                        <!-- Menampilkan gambar profil -->
+                        <img src="{% if current_user.profile_pic %}{{ url_for('static', filename='image/profile/' + current_user.profile_pic) }}{% else %}https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png{% endif %}"
+                            width="100" class="rounded-circle">
+                    </div>
+
+                    <div class="text-center mt-3">
+                        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+                        <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
+                        {% elif current_user.role == 'user' %}
+                        <span class="bg-secondary p-1 px-4 rounded text-white">Regular</span>
+                        {% endif %}
+                        <h5 class="mt-2 mb-0">{{ current_user.username }}</h5>
+                        <span>{{ current_user.role }}</span>
+
+                        <!-- Menambahkan formulir pembaruan profil -->
+                        <form method="POST" enctype="multipart/form-data">
+                            {{ update_form.hidden_tag() }}
+                            <div class="form-group mt-3">
+                                <label for="profile_pic" class="form-label">Update Profile Picture</label>
+                                <div class="mb-3">
+                                    {{ update_form.profile_pic(class="form-control", id="profile_pic") }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-light my-2 my-sm-0 text-left"
+                                style="background-color: #BC4749;">
+                                Update Profile
+                            </button>
+                        </form>
+
+                        <ul class="social-list">
+                            <li><i class="fa fa-facebook"></i></li>
+                            <li><i class="fa fa-dribbble"></i></li>
+                            <li><i class="fa fa-instagram"></i></li>
+                            <li><i class="fa fa-linkedin"></i></li>
+                            <li><i class="fa fa-google"></i></li>
+                        </ul>
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-light my-2 my-sm-0"
+                            style="background-color: #BC4749;">Logout</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+{% endblock %}

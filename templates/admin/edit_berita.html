@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Berita</title>
+</head>
+
+<body>
+    <h1>Edit Berita</h1>
+    <form action="/update_berita/{{ berita['_id'] }}" method="post" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ berita['title'] }}" required><br>
+
+        <label for="kategori">Kategori:</label>
+        <select class="form-select" id="kategori" name="kategori">
+            <option value="UKM Seni dan Budaya" {% if berita['kategori'] == 'UKM Seni dan Budaya' %}selected{% endif %}>
+                UKM Seni dan Budaya</option>
+            <option value="UKM Olahraga" {% if berita['kategori'] == 'UKM Olahraga' %}selected{% endif %}>UKM Olahraga
+            </option>
+        </select> <br>
+
+        <label for="deskripsi">Deskripsi:</label>
+        <textarea id="deskripsi" name="deskripsi" required>{{ berita['deskripsi'] }}</textarea><br>
+
+        <label for="gambar">Gambar:</label>
+        <img src="{{ berita['gambar'] }}" alt="{{ berita['title'] }}" style="max-width: 200px;"><br>
+        <input type="file" id="gambar" name="gambar" accept="image/*"><br>
+
+        <button type="submit">Update Berita</button>
+    </form>
+</body>
+
+</html>

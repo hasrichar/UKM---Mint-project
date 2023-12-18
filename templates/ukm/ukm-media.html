@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a2bb2fdda.js" crossorigin="anonymous"></script>
+    <title>UKM-Media</title>
+    <link rel="icon" href="/static/logo.png" type="image/x-icon">
+
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .jumbotron {
+            background: url('https://images.unsplash.com/photo-1476169785137-3bfe32e30ee1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .jumbotron h1 {
+            font-size: 3em;
+            color: black;
+        }
+
+        .jumbotron p {
+            font-size: 2em;
+            color: black;
+        }
+
+        .features {
+            background-color: #e9ecef;
+            padding: 60px 0;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #D2691E;
+        }
+
+        .hero.is-success {
+            background-color: #6A994E;
+            color: white;
+        }
+
+        /* Rounded corners and box shadow for UKM cards */
+        .ukm {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #more {
+            display: none;
+        }
+
+        #dots {
+            display: inline;
+        }
+
+        #myBtn {
+            background-color: #BC4749;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .back-button {
+            color: #007AFF;
+            /* Warna biru seperti di Safari */
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<nav>
+    <a href="#" id="backButton" class="back-button">&#9664; Kembali ke halaman sebelumnya</a>
+</nav>
+
+<body>
+    <!-- Header Section -->
+    <header class="jumbotron">
+        <div class="container">
+            <h1 class="display-4" style="color: black;">Unit Kegiatan Mahasiswa - Media</h1>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+
+        <!-- Deskripsi Rumpun Pendidikan -->
+        <section class="section">
+            <div class="container">
+                <div style="text-align:center">
+                    <h2>Deskripsi</h2>
+                </div>
+                <p>
+                    MedioCreativa, UKM Rumpun Media, adalah panggung kreativitas mahasiswa dalam dunia media. Melibatkan
+                    jurnalisme, desain grafis, dan produksi konten, UKM ini menjadi pusat inspirasi di era digital.
+                    Dengan kegiatan seperti talk show, webinar, dan produksi video, MedioCreativa membangun kreativitas,
+                    inovasi, dan integritas dalam setiap kegiatan. Menjadi anggota MedioCreativa adalah kesempatan untuk
+                    berkembang dalam atmosfer yang mendukung, sambil membawa dampak positif melalui media.
+                </p>
+            </div>
+        </section>
+
+        <!-- Kabar Terkini -->
+        <section class="hero is-success">
+            <div class="hero-body">
+                <div class="container">
+                    <h2 style="text-align: center;">Kabar Terkini</h2>
+                    <p style="margin-bottom: 50px;">
+                        Dalam beberapa bulan terakhir, UKM MediaHarbor telah menunjukkan kegiatan yang sangat
+                        membanggakan. Tim redaksi yang penuh semangat telah berhasil menciptakan konten-konten menarik
+                        dan informatif yang terus memperkaya atmosfer kampus. Berikut adalah rangkuman kabar terkini:
+                    </p>
+                    <p id="dots">...</p>
+                    <div id="more" style="display: none;">
+                        <p><strong>Podcast Edukatif</strong>
+                            MediaHarbor berhasil meluncurkan serial podcast edukatif yang telah menjadi favorit di
+                            kalangan
+                            mahasiswa. Dalam podcast ini, mereka membahas topik-topik menarik seputar dunia media,
+                            teknologi, dan tren terkini. Ini menjadi sarana yang efektif untuk berbagi pengetahuan dan
+                            menginspirasi sesama mahasiswa.</p>
+                        <p><strong>Kompetisi Karya Jurnalistik</strong>
+                            Dalam upaya mendorong bakat jurnalistik di kampus, MediaHarbor sukses menyelenggarakan
+                            kompetisi
+                            karya jurnalistik. Mahasiswa dari berbagai jurusan berlomba membuat artikel dan reportase
+                            kreatif. Inisiatif ini berhasil menciptakan suasana persaingan sehat dan meningkatkan
+                            kualitas
+                            karya jurnalistik di lingkungan kampus.</p>
+                        <p> <strong>Webinar Kreatif</strong>
+                            Menyadari pentingnya pemahaman terhadap perkembangan media digital, MediaHarbor menggelar
+                            serangkaian webinar kreatif. Webinar ini melibatkan para ahli di bidang media dan memberikan
+                            wawasan mendalam tentang tren terkini dan keterampilan yang dibutuhkan di dunia media masa
+                            kini.
+                        </p>
+                        <p>Kesuksesan ini semakin memperkuat posisi Medio Creativa sebagai
+                            salah satu UKM unggulan di
+                            rumpun media kampus. Melalui inovasi dan semangat kolaboratif, mereka terus menginspirasi
+                            mahasiswa untuk berkreasi dalam dunia media yang terus berkembang.</p>
+                    </div>
+                </div>
+                <button onclick="myFunction()" id="myBtn" class="btn btn-success mx-auto d-block">Read More</button>
+            </div>
+        </section>
+
+        <!-- Daftar UKM -->
+        <section class="section">
+            <div class="container">
+                <div class="ukm-container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <!-- UKM 1 -->
+                                <div class="ukm">
+                                    <h3>Media Kreatif</h3>
+                                    <p><strong>Deskripsi:</strong> MediaKreatif, UKM unggulan kreativitas media. Dari
+                                        fotografi hingga desain grafis, wadah eksplorasi bakat mahasiswa.</p>
+                                    <p><strong>Visi:</strong> elopor kreativitas visual kampus, ciptakan karya
+                                        menggerakkan, mengedukasi, dan menghibur.</p>
+                                    <p><strong>Program Kerja:</strong> MWorkshop desain grafis, fotografi, proyek
+                                        visual. Terlibat pameran seni, kontes kreativitas multimedia. #MediaKreatif
+                                        #KreativitasKampus</p>
+                                    <p><strong>Alamat Sekertariat:</strong> Gedung P, Lantai 4.</p>
+                                    <p><strong>Media Sosial:</strong> <a href="#">Instagram</a>, <a href="#">Twitter</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- UKM 2 -->
+                                <div class="ukm">
+                                    <h3>TechTalks Radio</h3>
+                                    <p><strong>Deskripsi:</strong> TechTalks Radio adalah UKM yang menggabungkan media
+                                        dan teknologi dengan menyajikan konten radio berkualitas. Fokus pada topik
+                                        teknologi terkini, wawancara, dan analisis mendalam, TechTalks Radio memberikan
+                                        pandangan yang informatif dan menghibur.</p>
+                                    <p><strong>Visi:</strong> Menjadi sumber terkemuka untuk informasi teknologi di
+                                        lingkungan kampus, menghubungkan mahasiswa dengan perkembangan terbaru.</p>
+                                    <p><strong>Program Kerja:</strong> Membuat dan mengudaraakan siaran radio mingguan,
+                                        mengundang narasumber ahli teknologi, dan menggelar acara langsung.</p>
+                                    <p><strong>Alamat Sekertariat:</strong> Gedung O, Lantai 4.</p>
+                                    <p><strong>Media Sosial:</strong> <a href="#">Instagram</a>, <a href="#">Twitter</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- UKM 3 -->
+                                <div class="ukm">
+                                    <h3>TechVibes</h3>
+                                    <p><strong>Deskripsi:</strong> TechVibes adalah UKM yang menggabungkan semangat
+                                        teknologi dan kreativitas. Menawarkan kesempatan kepada mahasiswa untuk
+                                        mendalami dunia teknologi, mulai dari pengembangan perangkat lunak, desain
+                                        antarmuka, hingga eksplorasi inovasi teknologi terkini.</p>
+                                    <p><strong>Visi:</strong> Menjadi pelopor inovasi teknologi di lingkungan kampus,
+                                        menciptakan suasana kreatif bagi mahasiswa untuk mengembangkan solusi berbasis
+                                        teknologi yang relevan dan bermanfaat.</p>
+                                    <p><strong>Program Kerja:</strong>Mengadakan workshop dan pelatihan rutin tentang
+                                        pengembangan perangkat lunak, desain grafis, dan teknologi terkini. Membentuk
+                                        tim kolaboratif untuk mengerjakan proyek-proyek teknologi yang relevan dengan
+                                        perkembangan industri. Dan Membentuk tim kolaboratif untuk mengerjakan
+                                        proyek-proyek teknologi yang relevan dengan perkembangan industri.</p>
+                                    <p><strong>Alamat Sekertariat:</strong> Gedung P, Lantai 2.</p>
+                                    <p><strong>Media Sosial:</strong> <a href="#">Instagram</a>, <a href="#">Twitter</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-md-start">
+                    <i class="fa-regular fa-envelope"></i>
+                    <i class="bi bi-envelope-fill"></i> Text 2
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="footer text-white text-center py-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-md-start">
+                    <i class="bi bi-envelope-fill"></i> Text 1
+                    <i class="bi bi-envelope-fill"></i> Text 2
+                </div>
+                <div class="col-md-6 text-md-end">
+                    Develope By MiNT
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "inline") {
+                dots.style.display = "none";
+                btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            } else {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            }
+        }
+        document.getElementById('backButton').addEventListener('click', function () {
+            goBack();
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

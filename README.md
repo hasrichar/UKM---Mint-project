@@ -1,6 +1,6 @@
 # Read Me Template
 
-![Project Image](https://drive.google.com/file/d/1_5W3Xs0qgWYlZPY1H7mL2lvLrWql3YYu/view?usp=drive_link)
+![Project Image]https://drive.google.com/file/d/1_5W3Xs0qgWYlZPY1H7mL2lvLrWql3YYu/view?usp=drive_link
 
 > This is a ReadMe template to help save you time and effort.
 
